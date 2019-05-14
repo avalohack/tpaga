@@ -1,0 +1,14 @@
+miniapp-gato2
+
+
+miniappma-123.
+miniappma-123
+
+
+miniapp-gato2:miniappma-123.
+miniapp-gato2:miniappma-123
+bWluaWFwcC1nYXRvMjptaW5pYXBwbWEtMTIzLg==
+bWluaWFwcC1nYXRvMjptaW5pYXBwbWEtMTIz
+
+
+http://stag.wallet.tpaga.co/api/v1/verify/phone

@@ -1,4 +1,7 @@
 <?php
+
+phpinfo();
+exit();
 //API URL
 $url = 'https://stag.wallet.tpaga.co/merchants/api/v1/payment_requests/create';
 
@@ -39,7 +42,7 @@ $payload ='{
 	"cost":"12000",
 	"purchase_details_url":"https://example.com/compra/348820",
 	"voucher_url":"https://example.com/comprobante/348820",
-	"idempotency_token":"ea0c7avalo-e85a-48c4-b7f9-24a9014a2339",
+	"idempotency_token":"ea0c7aval1-e85a-48c4-b7f9-24a9014a2339",
 	"order_id":"348820",
 	"terminal_id":"sede_45",
 	"purchase_description":"Compra en Tienda X",
