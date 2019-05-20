@@ -1,0 +1,11 @@
+_satellite.pushAsyncScript(function(event, target, $variables){
+  /*setTimeout(function() {
+    if (window.spreadShopLoaded) {
+        addShopLoadHandler(function() {
+            custevent = document.createEvent("CustomEvent")
+            custevent.initCustomEvent('DTMtemp', true, false, undefined)
+            document.body.dispatchEvent(custevent)
+        })
+    }
+}, 1000)*/
+});

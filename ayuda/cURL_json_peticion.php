@@ -1,7 +1,7 @@
 <?php
 
-phpinfo();
-exit();
+// phpinfo();
+// exit();
 //API URL
 $url = 'https://stag.wallet.tpaga.co/merchants/api/v1/payment_requests/create';
 

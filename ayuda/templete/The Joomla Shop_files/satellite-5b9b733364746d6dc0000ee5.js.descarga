@@ -1,0 +1,46 @@
+_satellite.pushAsyncScript(function(event, target, $variables){
+  if (_satellite.getVar("BusinessSegment") == "www" && _satellite.readCookie("googleOptOut") != "1") {
+    var googleTag = document.createElement('script');
+    var pageName = _satellite.getVar("PageName");
+    googleTag.type = 'text/javascript';
+    googleTag.async = true;
+    googleTag.src = 'https://www.googletagmanager.com/gtag/js?id=AW-1068221961';
+    document.head.appendChild(googleTag);
+    window.dataLayer = window.dataLayer || [];
+
+    window.gtag = function() {
+        dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    gtag('config', 'AW-1068221961', {
+        'anonymize_ip': true,
+        'forceSSL': true
+    });
+    gtag('config', 'UA-24747471-34', {
+        'anonymize_ip': true,
+        'forceSSL': true,
+        'page_location': location.href,
+        'page': location.pathname,
+        'page_title': _satellite.getVar("PageName"),
+      	'ecomm_pagetype': _satellite.getVar("PageName"),
+        'custom_map': {
+            'dimension1': 'ecomm_pagetype',
+            'dimension2': 'ecomm_prodid'
+        }
+    });
+    if (pageName == "Marketplace | Product Detail" || pageName.indexOf("sketchomat") > -1 || pageName.indexOf("smartomat") > -1) {
+        var product = _satellite.getVar("Product") || {};
+        gtag('event', 'view_item', {
+            "items": [{
+                "id": product.id,
+                "category": _satellite.getVar("ShopId"),
+                "variant": product.appearance,
+                "price": product.price || "0.0"
+            }],
+            "ecomm_pagetype": "product",
+            "ecomm_prodid": _satellite.getVar("MP RMKT Product ID") || ""
+        });
+    }
+}
+
+});
