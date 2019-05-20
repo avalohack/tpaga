@@ -15,8 +15,15 @@
   <nav class="my-2 my-md-0 mr-md-3">
     <a class="p-2 text-dark" href="<?php echo base_url().'index.php/home'?>">home</a>
     <a class="p-2 text-dark" href="#">Contacto</a>
+    <a class="p-2 text-dark" href="<?php echo base_url().'index.php/user/login'?>">login</a>
   </nav>
-  <a class="btn btn-outline-primary" href="<?php echo base_url().'index.php/user/shopping'?>">pagar</a>
+  <a class="btn btn-outline-primary" href="<?php echo base_url().'index.php/user/shopping'?>">Pagar 
+        <?php 
+          if($shopping>0){
+              print_r($shopping);
+          } 
+        ?> 
+  </a>
 </div>	
    
 

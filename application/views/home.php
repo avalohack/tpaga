@@ -12,29 +12,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 
 <?php
-      foreach ($GetPlans as $key => $value) {
-        // echo "<pre>";
-        //   print_r($value['IdPlans']);
-        //   echo "<br>";
-        //   print_r($value['Name']);
-        //   echo "<br>";
-        //   print_r($value['Cost']);
-        //   echo "<br>";
-        //   print_r($value['Includ']);
-        // echo "</pre>";
+      foreach ($GetPlans as $key => $value) {        
 ?>
- <div class="card mb-4 shadow-sm">      
-      <div class="card-header">
-        <h4 class="my-0 font-weight-normal"><?php echo $value['Name'] ?></h4>
+      <div class="card mb-4 shadow-sm">      
+          <div class="card-header">
+            <h4 class="my-0 font-weight-normal"><?php echo $value['Name'] ?></h4>
+          </div>
+          <div class="card-body">
+            <h1 class="card-title pricing-card-title"><?php echo $value['Cost'] ?> <small class="text-muted">$</small></h1>
+            <ul class="list-unstyled mt-3 mb-4">
+              <li><?php echo $value['Includ'] ?></li>
+            </ul>
+            <button onclick="AddProduct(<?php echo  $value['IdPlans']; ?>)" type="button" class="btn btn-lg btn-block btn-primary">Agregar</button>
+          </div>
       </div>
-      <div class="card-body">
-        <h1 class="card-title pricing-card-title"><?php echo $value['Cost'] ?> <small class="text-muted">$</small></h1>
-        <ul class="list-unstyled mt-3 mb-4">
-          <li>Incluye <?php echo $value['Includ'] ?> Usuarios</li>
-        </ul>
-        <button type="button" class="btn btn-lg btn-block btn-primary">Agregar</button>
-      </div>
-    </div>
 
 <?php
       }
@@ -42,6 +33,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     
   </div>
 </div>
+
+
 <?php
+//scrip de peticion ajax
+ include 'include/ajax.php';
  include 'include/footer.php';
 ?>
