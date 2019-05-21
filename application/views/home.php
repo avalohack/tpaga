@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
   <h1 class="display-4">wi-fi</h1>
-  <p class="lead">Servicio de wifi por todo el mundo, contrata un plan y podra usarlo en todo el mundo mas info<a href="#">Aqui</a></p>
+  <p class="lead">Servicio de wifi por todo el mundo, contrata un plan y podra usarlo en todo el mundo mas info<a href="#"> Aqui</a></p>
 </div>
 
 <div class="container">
@@ -37,6 +37,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 <?php
 //scrip de peticion ajax
- include 'include/ajax.php';
  include 'include/footer.php';
+ include 'include/ajax.php';
 ?>

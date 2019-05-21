@@ -2,6 +2,10 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 //vista
  include 'include/head.php';
+
+
+
+ echo $items;
 ?>
 
 

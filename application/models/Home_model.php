@@ -7,6 +7,12 @@ class Home_model extends CI_Model{
 		$query=$this->db->query($sql);
 		return $query->result_array();	
 	}
+	public function GetPlans_iten($item){		
+		$sql=" SELECT * FROM plans ";
+		$sql.= " WHERE IdPlans = ".$item;
+		$query=$this->db->query($sql);
+		return $query->result_array();	
+	}
 }
 
 

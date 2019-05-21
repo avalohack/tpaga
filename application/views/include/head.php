@@ -17,12 +17,12 @@
     <a class="p-2 text-dark" href="#">Contacto</a>
     <a class="p-2 text-dark" href="<?php echo base_url().'index.php/user/login'?>">login</a>
   </nav>
-  <a class="btn btn-outline-primary" href="<?php echo base_url().'index.php/user/shopping'?>">Pagar 
+  <a class="btn btn-outline-primary" href="<?php echo base_url().'index.php/user/shopping/'?>">Pagar 
         <span id="ShoppingCar">
         <?php 
-          // if($shopping>0){
+          if($shopping>0){
               print_r($shopping);
-          // } 
+          } 
         ?> 
         </span>
   </a>
