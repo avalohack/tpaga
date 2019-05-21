@@ -32,9 +32,28 @@ print_r($data['shopping']);
 
 		$item = substr(implode('', $items),0,-2);//quitamos las 2 ultimas letra para que my sql no falle
 		$this->load->model('home_model');//modelo bd
-		$data['countShopping']=$this->home_model->GetPlans_iten($item);//pasamos la linea de items para select
+		$items=$this->home_model->GetPlans_iten($item);//pasamos la linea de items para select
 
 
+foreach ($items as $key => $value) {
+	if ($countShopping[$value['IdPlans']]) {
+
+		$itemsAdd[]= array("cantidad"=>$countShopping[$value['IdPlans']],
+						   "IdPlans"=>$value['IdPlans'],
+						   "Name"=>$value['Name'],
+						   "Cost"=>$value['Cost'],
+						   "Includ"=>$value['Includ'],
+						);
+	}
+
+}
+	// echo $value['IdPlans'];
+		echo"<pre>";
+			print_r($itemsAdd);
+		echo"<pre>";
+	
+
+exit();
 
 		echo"<pre>";
 			print_r($data['countShopping']);
