@@ -41,7 +41,18 @@ class Home extends CI_Controller {
 		// exit();
 		$this->load->model('home_model');
 
-		$data['shopping'] = count($this->session->userdata('shopping'));
+
+		if($this->session->userdata('shopping')){
+			$data['shopping'] = count($this->session->userdata('shopping'));
+		}
+		else{
+			$data['shopping']= 0;
+		}
+		
+		// echo "<pre>";
+		// 	print_r($data['shopping']);
+		// echo "<pre>";
+		// exit();
 		$data['GetPlans']=$this->home_model->GetPlans();
 		$this->load->view('home',$data);
 	}
