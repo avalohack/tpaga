@@ -32,18 +32,14 @@ class Home extends CI_Controller {
 		$this->session->set_userdata($user_session);
 	}
 
+
+
 	public function index()
 	{
 
-		// echo "<pre>";
-		// 	print_r(count($products) );
-		// echo "<pre>";
-		// exit();
 		$this->load->model('home_model');
-
-
 		if($this->session->userdata('shopping')){
-			$data['shopping'] = count($this->session->userdata('shopping'));
+			$data['shopping'] = count(explode(',',$this->session->userdata('shopping')['0']));
 		}
 		else{
 			$data['shopping']= 0;

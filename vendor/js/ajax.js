@@ -1,6 +1,6 @@
 var shoppingCar = []; //vectora para saver que ictens se quieren comprar
 const data = new FormData();
-ruta = "home/addSession/";
+ruta = "index.php/home/addSession/";
 
 //funcion para añadir itens al car 
 function AddProduct(id){

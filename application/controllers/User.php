@@ -23,7 +23,7 @@ class User extends CI_Controller {
 
 
 // echo"<pre>";
-// 	print_r($countShopping);
+// 	print_r($shopping);
 // echo"<pre>";
 
 // print_r($data['shopping']);
@@ -31,8 +31,8 @@ class User extends CI_Controller {
 		foreach ( $countShopping as $key => $value) {
 			$items[]= "(IdPlans = ".$value." )OR";
 		}
-
 		$item = substr(implode('', $items),0,-2);//quitamos las 2 ultimas letra para que my sql no falle
+		
 		$this->load->model('home_model');//modelo bd
 		$items=$this->home_model->GetPlans_iten($item);//pasamos la linea de items para select
 
