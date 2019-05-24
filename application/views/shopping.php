@@ -22,8 +22,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 		 		<div class="row">
 		 			<div class="col-md-5">
-
-
 		 				<?php
 		 					foreach ($items as $key => $value) {?>
 		 						<h4 class="card-title border-top "><?php echo $value['Name'] ;?>
@@ -34,8 +32,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		 						</h4>
 		 				<?php		
 		 					}
-		 				?>
-		 				
+		 				?> 				
 		 				
 		        		
 		 			</div>
@@ -61,10 +58,27 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		 				</div>
 		 				   <span class="text-right">  </span> 
 
-		 				 <?php echo form_open('pay/tpaga'); ?>
-		 				 <input type="email" name="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="">
-		 				 <input type="password" name="inputPassword" class="form-control" placeholder="Password" required="">		
-		 				 <input type="password" name="inputPassword2" class="form-control" placeholder="Repetir Password" required="">		
+		 				<?php 
+		 				$attributes = array('name' =>'formUser');
+		 				echo form_open('pay/tpaga',$attributes); ?>
+		 				<input type="email" name="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="">
+		 				<input type="password" name="inputPassword" class="form-control" placeholder="Clave" required="">	
+						<!-- oculto estos capos solo son para registse  -->
+						
+
+						<br>
+						<div class="custom-control custom-checkbox">
+						    <input type="checkbox" class="custom-control-input" onclick="userNew()" name="registered" id="defaultUnchecked">
+					    	<label class="custom-control-label" for="defaultUnchecked">Sino estas registrado</label>
+						</div>
+						<br>
+
+						<div id="hide" style="display:none" >
+		 				 	<input type="password" name="inputPassword2" class="form-control" placeholder="Repetir Clave"	 id="inputPassword2">		
+							<input type="text"     name="inputNickname"  class="form-control" placeholder="Nombre de usuario"id="inputNickname">
+							<input type="number"   name="inputPhone" 	 class="form-control" placeholder="Telefono" 		 id="inputPhone">
+
+						</div>	
 
 		 				 <button type="submit" class="btn btn-lg btn-block btn-primary">Pagar</button>
 		 				 <?php if (isset($mensaje)) {
@@ -85,5 +99,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 <?php
  include 'include/footer.php';
+ include 'include/jsOcultarCambios.php';
+ include 'include/end.php';
 ?>
 

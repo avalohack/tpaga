@@ -20,12 +20,9 @@ class User extends CI_Controller {
 		$shopping = $this->session->userdata('shopping');//obtenemos el string de la cantidad de items
 		$countShopping= explode(',', $shopping['0']); //lo pasamos a un vetorpara contarlo
 		$data['shopping'] = count($countShopping);//contamos la cantidad de items 
-
-
 // echo"<pre>";
 // 	print_r($shopping);
 // echo"<pre>";
-
 // print_r($data['shopping']);
 		//construimos la linea de consulta para recumerar los items y simpre mostra el valor desde backend
 		foreach ( $countShopping as $key => $value) {
@@ -48,16 +45,12 @@ foreach ($items as $key => $value) {
 						);
 	}
 	$total= $total+$value['Cost'];
-
 }
 	// echo $value['IdPlans'];
 		// echo"<pre>";
 		// 	print_r($itemsAdd);
 		// echo"<pre>";
-
-		// exit();
-	
-
+		// exit();	
 // exit();
 
 // 		echo"<pre>";

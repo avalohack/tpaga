@@ -39,4 +39,5 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 //scrip de peticion ajax
  include 'include/footer.php';
  include 'include/ajax.php';
+ include 'include/end.php';
 ?>

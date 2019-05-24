@@ -10,4 +10,5 @@ vista de usuario
 
 <?php
  include 'include/footer.php';
+ include 'include/end.php';
 ?>
