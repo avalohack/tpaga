@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 24-05-2019 a las 23:47:28
+-- Tiempo de generación: 28-05-2019 a las 00:39:36
 -- Versión del servidor: 10.1.22-MariaDB
 -- Versión de PHP: 7.1.4
 
@@ -21,6 +21,19 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `tpaga`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `invoice detail`
+--
+
+CREATE TABLE `invoice detail` (
+  `order_id` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `Name` varchar(15) COLLATE utf8_unicode_ci NOT NULL,
+  `Cost` int(8) NOT NULL,
+  `Includ` varchar(40) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -84,7 +97,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`Email`, `Password`, `IdUser`, `Tipo`, `Nickname`, `Phone`) VALUES
-('info@vacasenvuelo.com', 'd422e1d7d82d9c0a609127b0b24dfe7cfcde59dd', 1, 0, NULL, 2147483647);
+('info@vacasenvuelo.com', 'd422e1d7d82d9c0a609127b0b24dfe7cfcde59dd', 1, 0, NULL, 2147483647),
+('a@a.com', 'fc1200c7a7aa52109d762a9f005b149abef01479', 2, 0, NULL, 2147483647);
 
 --
 -- Índices para tablas volcadas
@@ -121,7 +135,7 @@ ALTER TABLE `plans`
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `IdUser` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;COMMIT;
+  MODIFY `IdUser` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

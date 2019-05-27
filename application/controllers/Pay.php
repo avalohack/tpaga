@@ -37,8 +37,36 @@ class Pay extends CI_Controller {
 					}
 
 			}
+
+
+
+$tpaga = array(	'cost' => '12000',
+			    'purchase_details_url' => 'https://example.com/compra/348820',
+			    'voucher_url' => 'https://example.com/comprobante/348820',
+			    'idempotency_token' => 'ea0c7avalo-e85a-48c4-b7f9-24a9014a2339',
+			    'order_id' => '348820',//numero_factura
+			    'terminal_id' => 'sede_45',
+			    'purchase_description' => 'Compra en Tienda X',
+			    'purchase_items' => Array(
+								            '0' => Array(
+								                    'name' => 'Aceite de girasol',
+								                    'value' => '13.390',
+								                ),
+			        					),
+			    'user_ip_address' => '61.1.224.56',
+			    'expires_at' => '2019-05-15T20:10:57.549653+00:00',
+		);
+
+echo "<pre>";
+	print_r($tpaga);
+echo "</pre>";
+
+
+exit();
+
 		//login
 		$usuario = $this->user_model->getUserLogin();
+
 		echo"<pre>";
 			print_r($usuario);
 		echo"</pre>";

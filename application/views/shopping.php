@@ -23,6 +23,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		 		<div class="row">
 		 			<div class="col-md-5">
 		 				<?php
+		 				if($items==0){?>
+		 						<h4 class="card-title border-top ">No
+		 							<small class="text-muted"> 
+		 								Has agregado nada al carro
+		 							</small>
+		 						</h4>
+		 					<?php	
+		 				}
+		 				else{
+
 		 					foreach ($items as $key => $value) {?>
 		 						<h4 class="card-title border-top "><?php echo $value['Name'] ;?>
 		 							<small class="text-muted"> 
@@ -30,8 +40,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		 							</small>
 		 							<?php echo $value['Cost'] ;?>
 		 						</h4>
-		 				<?php		
-		 					}
+		 					<?php		
+		 					}				
+		 				}
 		 				?> 				
 		 				
 		        		
