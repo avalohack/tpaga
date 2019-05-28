@@ -12,6 +12,17 @@ class Invoices_model extends CI_Model{
 		exit();
 		return $query->result_array();	
 	}
+	public function getNumMax(){
+		$sql = 'SELECT order_id FROM invoices';
+		$sql.= ' WHERE `order_id` =';
+		$sql.= ' (SELECT MAX( `order_id` )  FROM invoices)';
+		$query=$this->db->query($sql);
+		return $query->result_array();
+	}
+	public function setInvoices($tpaga){
+		//return $this->db->insert($tabla,$documento);
+
+	}
 }
 
 
