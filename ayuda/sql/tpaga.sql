@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 28-05-2019 a las 00:39:36
+-- Tiempo de generación: 29-05-2019 a las 23:42:14
 -- Versión del servidor: 10.1.22-MariaDB
 -- Versión de PHP: 7.1.4
 
@@ -25,11 +25,12 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `invoice detail`
+-- Estructura de tabla para la tabla `invoicedetail`
 --
 
-CREATE TABLE `invoice detail` (
+CREATE TABLE `invoicedetail` (
   `order_id` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `IdPlans` int(2) NOT NULL,
   `Name` varchar(15) COLLATE utf8_unicode_ci NOT NULL,
   `Cost` int(8) NOT NULL,
   `Includ` varchar(40) COLLATE utf8_unicode_ci NOT NULL
@@ -49,10 +50,10 @@ CREATE TABLE `invoices` (
   `order_id` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `terminal_id` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `purchase_description` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `purchase_items` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `user_ip_address` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `expires_at` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `IdUser` int(11) NOT NULL
+  `IdUser` int(11) NOT NULL,
+  `Timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -73,9 +74,22 @@ CREATE TABLE `plans` (
 --
 
 INSERT INTO `plans` (`IdPlans`, `Name`, `Cost`, `Includ`) VALUES
-(1, 'Semanal', 20, 'Incluye Uno (1) Usuarios'),
-(2, 'Mensual', 60, 'Incluye Uno (2) Usuarios'),
-(3, 'Año', 400, 'Incluye Uno (4) Usuarios');
+(1, 'Semanal', 1, 'Incluye Uno (1) Usuarios'),
+(2, 'Mensual', 2, 'Incluye Uno (2) Usuarios'),
+(3, 'Año', 3, 'Incluye Uno (4) Usuarios');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `result`
+--
+
+CREATE TABLE `result` (
+  `order_id` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `IdUser` int(11) NOT NULL,
+  `result` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `Timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -91,14 +105,6 @@ CREATE TABLE `users` (
   `Nickname` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
   `Phone` int(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Volcado de datos para la tabla `users`
---
-
-INSERT INTO `users` (`Email`, `Password`, `IdUser`, `Tipo`, `Nickname`, `Phone`) VALUES
-('info@vacasenvuelo.com', 'd422e1d7d82d9c0a609127b0b24dfe7cfcde59dd', 1, 0, NULL, 2147483647),
-('a@a.com', 'fc1200c7a7aa52109d762a9f005b149abef01479', 2, 0, NULL, 2147483647);
 
 --
 -- Índices para tablas volcadas
@@ -135,7 +141,7 @@ ALTER TABLE `plans`
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `IdUser` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;COMMIT;
+  MODIFY `IdUser` int(11) NOT NULL AUTO_INCREMENT;COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
