@@ -12,20 +12,21 @@ class Home extends CI_Controller {
 	}
 
 	public function user_session(){
-		if (isset($GLOBALS['_COOKIE']['ci_session'])) {
-		$cookie=$GLOBALS['_COOKIE']['ci_session'];
-		}
-		else{
-			$cookie= "navegador_anonimo".rand();
-		}	
-			$user_session = array(
-				     'session_id'    => $cookie,
-				     'ip_address'    => $GLOBALS['_SERVER']['REMOTE_ADDR'],
-				     'user_agent'    => $GLOBALS['_SERVER']['HTTP_USER_AGENT'],
-				     'last_activity' => '88888845',
-			);	
-			$this->session->set_userdata($user_session);
+		// if (isset($GLOBALS['_COOKIE']['ci_session'])) {
+		// $cookie=$GLOBALS['_COOKIE']['ci_session'];
+		// }
+		// else{
+		// 	$cookie= "navegador_anonimo".rand();
+		// }	
+		// 	$user_session = array(
+		// 		     'session_id'    => $cookie,
+		// 		     'ip_address'    => $GLOBALS['_SERVER']['REMOTE_ADDR'],
+		// 		     'user_agent'    => $GLOBALS['_SERVER']['HTTP_USER_AGENT'],
+		// 		     'last_activity' => '88888845',
+		// 	);	
+		// 	$this->session->set_userdata($user_session);
 	}
+	
 	public function addSession(){
 		$items = $this->input->post('items');
 		$user_session = array('shopping' => array($items));
@@ -36,6 +37,9 @@ class Home extends CI_Controller {
 
 	public function index()
 	{
+		echo "<pre>";
+			print_r($this->session->userdata());
+		echo "</pre>";
 
 		$this->load->model('home_model');
 		if($this->session->userdata('shopping')){
@@ -45,10 +49,6 @@ class Home extends CI_Controller {
 			$data['shopping']= 0;
 		}
 		
-		// echo "<pre>";
-		// 	print_r($data['shopping']);
-		// echo "<pre>";
-		// exit();
 		$data['GetPlans']=$this->home_model->GetPlans();
 		$this->load->view('home',$data);
 	}

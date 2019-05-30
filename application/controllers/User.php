@@ -7,6 +7,8 @@ class User extends CI_Controller {
 		parent ::__construct();
 		$this->load->helper("url");
 		$this->load->helper("form");
+        $this->load->library('session');
+
 	}
 
 	public function index()
@@ -17,8 +19,14 @@ class User extends CI_Controller {
 
 	public function shopping()
 	{
+		echo "<pre>";
+			print_r($this->session->userdata());
+		echo "</pre>";
+
+
 		$shopping = $this->session->userdata('shopping');//obtenemos el string de la cantidad de items
-		$countShopping= explode(',', $shopping['0']); //lo pasamos a un vetorpara contarlo
+		
+		$countShopping= explode(',', $shopping[0]); //lo pasamos a un vetorpara contarlo
 		
 			if($countShopping[0]==""){
 				$data['shopping'] = 0;
