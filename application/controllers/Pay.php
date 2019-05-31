@@ -112,15 +112,24 @@ class Pay extends CI_Controller {
 					$this->load->helper('apiTpaga_helper');
 					$result = create($tpaga);	
 
+// echo"<pre>";
+// print_r($result);
+// echo"</pre>";
+
+					$jsonResult = json_encode($result);
+// exit();
 					//guardar respuesta
-					$this->result_model->setResult(
+					$dd=$this->result_model->setResult(
 								base64_decode($numMax),
 								$usuario[0]['IdUser'],
-								$result['tpaga_payment_url']
+								$jsonResult
 							 );
+					echo"<pre>";
+						print_r($dd);
+					echo"</pre>";			
 
 					//redirigir para pago
-					redirect("'".$result['tpaga_payment_url']."'");
+					redirect($result['tpaga_payment_url']);
 					////////////////////////////////////////////////////////////////	
 					}//8
 						//$this->load->view('shopping',$data);
@@ -190,3 +199,68 @@ class Pay extends CI_Controller {
 				//peticion de pago
 				//echo $data['mensaje'];
 				//$this->load->view('shopping',$data);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+////////////////////////
+////////////////////////
+////////////////////////
+/////////////////////
+/////////////////////////
+//////////////////////////
+// Array
+// (
+//     [miniapp_user_token] => 
+//     [cost] => 3.0
+//     [purchase_details_url] => https://192.168.1.79/tpaga/pay/success/Ng==
+//     [voucher_url] => https://192.168.1.79/tpaga/pay/detail/Ng==
+//     [idempotency_token] => Ng==-3-
+//     [order_id] => 6
+//     [terminal_id] => https://192.168.1.79/tpaga/
+//     [purchase_description] => compar wifi Company servicios
+//     [purchase_items] => Array
+//         (
+//             [0] => Array
+//                 (
+//                     [cantidad] => 1
+//                     [IdPlans] => 1
+//                     [Name] => Semanal
+//                     [Cost] => 1
+//                     [Includ] => Incluye Uno (1) Usuarios
+//                 )
+
+//             [1] => Array
+//                 (
+//                     [cantidad] => 2
+//                     [IdPlans] => 2
+//                     [Name] => Mensual
+//                     [Cost] => 2
+//                     [Includ] => Incluye Uno (2) Usuarios
+//                 )
+
+//         )
+
+//     [user_ip_address] => 192.168.1.79
+//     [merchant_user_id] => 
+//     [token] => pr-1d4eeb13152c4c4bbed83477c62ac1e15b1a986f766767bb64b3ea37a73843ea67dfcc05
+//     [tpaga_payment_url] => https://w.tpaga.co/eyJtIjp7Im8iOiJQUiJ9LCJkIjp7InMiOiJtZWRpY2FwcCIsInBydCI6InByLTFkNGVlYjEzMTUyYzRjNGJiZWQ4MzQ3N2M2MmFjMWUxNWIxYTk4NmY3NjY3NjdiYjY0YjNlYTM3YTczODQzZWE2N2RmY2MwNSJ9fQ==
+//     [status] => created
+//     [expires_at] => 2019-06-01T17:02:39.000-05:00
+//     [cancelled_at] => 
+//     [checked_by_merchant_at] => 
+//     [delivery_notification_at] => 
+// )

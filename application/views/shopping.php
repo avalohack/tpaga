@@ -37,8 +37,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		 						<h4 class="card-title border-top "><?php echo $value['Name'] ;?>
 		 							<small class="text-muted"> 
 		 								<?php echo $value['Includ'] ;?> 
-		 							</small>
-		 							<?php echo $value['Cost'] ;?>
+		 							<?php echo "Costo $".$value['Cost'] ;?>
+		 							</small> 
 		 						</h4>
 		 					<?php		
 		 					}				
