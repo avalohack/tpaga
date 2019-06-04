@@ -129,6 +129,8 @@ class Pay extends CI_Controller {
 					echo"</pre>";			
 
 					//redirigir para pago
+					echo $result['tpaga_payment_url'];
+					exit();
 					redirect($result['tpaga_payment_url']);
 					////////////////////////////////////////////////////////////////	
 					}//8

@@ -61,14 +61,10 @@ class User extends CI_Controller {
 				$itemsOrdered[$iOrderd['IdPlans']] = array('IdPlans'=>$iOrderd['IdPlans'] ,
 														   'Name'   =>$iOrderd['Name'], 
 														   'Cost'   =>$iOrderd['Cost'], 
-														   'Includ' =>$iOrderd['Includ'],
+														   'Includ' =>$iOrderd['Includ']
 												);
 			}
-			// echo '<br><br><br>**itemsOrdered ini';		
-			// 		echo "<pre>";
-			// 			print_r($itemsOrdered);
-			// 		echo "</pre>";
-			// echo 'itemsOrdered fin***<br><br><br>';
+	
 			foreach ($countShopping as $iTAdd => $valueAdd) {
 						$itemsAdd[] = $itemsOrdered[$valueAdd];
 						$total		= $total+$itemsOrdered[$valueAdd]['Cost'];

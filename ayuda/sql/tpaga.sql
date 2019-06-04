@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 01-06-2019 a las 00:18:42
+-- Tiempo de generación: 04-06-2019 a las 22:37:48
 -- Versión del servidor: 10.1.22-MariaDB
 -- Versión de PHP: 7.1.4
 
@@ -42,7 +42,9 @@ CREATE TABLE `invoicedetail` (
 
 INSERT INTO `invoicedetail` (`order_id`, `IdPlans`, `Name`, `Cost`, `Includ`) VALUES
 ('1', 1, 'Semanal', 1, 'Incluye Uno (1) Usuarios'),
-('1', 2, 'Mensual', 2, 'Incluye Uno (2) Usuarios');
+('1', 2, 'Mensual', 2, 'Incluye Uno (2) Usuarios'),
+('2', 1, 'Semanal', 1, 'Incluye Uno (1) Usuarios'),
+('2', 2, 'Mensual', 2, 'Incluye Uno (2) Usuarios');
 
 -- --------------------------------------------------------
 
@@ -69,7 +71,8 @@ CREATE TABLE `invoices` (
 --
 
 INSERT INTO `invoices` (`cost`, `purchase_details_url`, `voucher_url`, `idempotency_token`, `order_id`, `terminal_id`, `purchase_description`, `user_ip_address`, `expires_at`, `IdUser`, `Timestamp`) VALUES
-(3, 'https://192.168.1.79/tpaga/pay/success/MQ==', 'https://192.168.1.79/tpaga/pay/detail/MQ==', 'MQ==-3-', '1', 'https://192.168.1.79/tpaga/', 'compar wifi Company servicios', '192.168.1.79', '2019-06-01T17:16:42.000-05:00', 2, '2019-05-31 22:16:42');
+(3, 'https://192.168.1.79/tpaga/pay/success/MQ==', 'https://192.168.1.79/tpaga/pay/detail/MQ==', 'MQ==-3-', '1', 'https://192.168.1.79/tpaga/', 'compar wifi Company servicios', '192.168.1.79', '2019-06-01T17:16:42.000-05:00', 2, '2019-05-31 22:16:42'),
+(6, 'https://192.168.1.79/tpaga/pay/success/Mg==', 'https://192.168.1.79/tpaga/pay/detail/Mg==', 'Mg==-6-', '2', 'https://192.168.1.79/tpaga/', 'compar wifi Company servicios', '192.168.1.79', '2019-06-05T11:09:37.000-05:00', 2, '2019-06-04 16:09:37');
 
 -- --------------------------------------------------------
 
@@ -112,7 +115,7 @@ CREATE TABLE `result` (
 --
 
 INSERT INTO `result` (`order_id`, `IdUser`, `result`, `Timestamp`, `id_respuesta`) VALUES
-('1', 2, '{\"miniapp_user_token\":null,\"cost\":\"3.0\",\"purchase_details_url\":\"https:\\/\\/192.168.1.79\\/tpaga\\/pay\\/success\\/MQ==\",\"voucher_url\":\"https:\\/\\/192.168.1.79\\/tpaga\\/pay\\/detail\\/MQ==\",\"idempotency_token\":\"MQ==-3-\",\"order_id\":\"1\",\"terminal_id\":\"https:\\/\\/192.1', '2019-05-31 22:16:43', 0);
+('1', 2, '{\"miniapp_user_token\":null,\"cost\":\"3.0\",\"purchase_details_url\":\"https:\\/\\/192.168.1.79\\/tpaga\\/pay\\/success\\/MQ==\",\"voucher_url\":\"https:\\/\\/192.168.1.79\\/tpaga\\/pay\\/detail\\/MQ==\",\"idempotency_token\":\"MQ==-3-\",\"order_id\":\"1\",\"terminal_id\":\"https:\\/\\/192.1', '2019-05-31 22:16:43', 1);
 
 -- --------------------------------------------------------
 
@@ -173,6 +176,11 @@ ALTER TABLE `users`
 --
 ALTER TABLE `plans`
   MODIFY `IdPlans` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT de la tabla `result`
+--
+ALTER TABLE `result`
+  MODIFY `id_respuesta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT de la tabla `users`
 --
