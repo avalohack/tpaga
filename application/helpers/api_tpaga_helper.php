@@ -1,8 +1,6 @@
-<?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-if ( ! function_exists('getRealIP')){
-
-	function create($payload){
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+if ( ! function_exists('create_tpaga')){
+	function create_tpaga($payload){
 		//API URL
 		$url = 'https://stag.wallet.tpaga.co/merchants/api/v1/payment_requests/create';
 		//create a new cURL resource
@@ -26,6 +24,6 @@ if ( ! function_exists('getRealIP')){
 	}
 
 }	
-else{
-	return "tu helper esta mal revisa ";
-}
+// else{
+// 	return "tu helper esta mal revisa ";
+// }

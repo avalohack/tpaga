@@ -37,9 +37,9 @@ class Home extends CI_Controller {
 
 	public function index()
 	{
-		echo "<pre>";
-			print_r($this->session->userdata());
-		echo "</pre>";
+		// echo "<pre>";
+		// 	print_r($this->session->userdata());
+		// echo "</pre>";
 
 		$this->load->model('home_model');
 		if($this->session->userdata('shopping')){

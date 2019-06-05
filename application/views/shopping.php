@@ -72,7 +72,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		 				<?php 
 		 				$attributes = array('name' =>'formUser');
 		 				echo form_open('pay/tpaga',$attributes); ?>
-		 				<input type="email" name="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="">
+		 				<input type="email" name="inputEmail" class="form-control" placeholder="Email o Usuario" required="" autofocus="">
 		 				<input type="password" name="inputPassword" class="form-control" placeholder="Clave" required="">	
 						<!-- oculto estos capos solo son para registse  -->
 						
