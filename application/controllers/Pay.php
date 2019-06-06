@@ -130,13 +130,12 @@ public function tpaga(){
 							$usuario[0]['IdUser'],
 							$jsonResult
 						 );
-				echo"<pre>";
-					print_r($dd);
-				echo"</pre>";
-				//redirigir para pago
-				echo "---------->".$result['tpaga_payment_url'];
-				echo "seras redirigidoa billetera";
-				sleep('5');
+				// echo"<pre>";
+				// 	print_r($dd);
+				// echo"</pre>";
+				// //redirigir para pago
+				// echo "---------->".$result['tpaga_payment_url'];
+				// echo "seras redirigidoa billetera";
 				redirect($result['tpaga_payment_url']);
 				////////////////////////////////////////////////////////////////	
 			}//6f			
