@@ -12,6 +12,106 @@ public function __construct(){
 	$this->load->model('invoices_model');
 	$this->load->model('result_model');
 }
+
+public function purchase(){
+	$usuario = $this->user_model->getUserLogin();
+
+	echo"<pre>";
+			print_r($usuario);
+	echo"</pre>";
+
+
+	$coutnUser 	 = count($usuario);
+	if ($coutnUser <= 0){//5
+		$data = $this->itemsAndTotal();
+		$data['mensaje'] = "hola! algo esta mal Email/Usuario o clave";
+		$this->load->view('shopping',$data);
+	}//5f
+	else{//6
+		$data = $this->itemsAndTotal();	
+		$total 	  = $data['total'];
+		$itemsAdd = $data['items'];
+		//obtener numero de factura existente + 1 para el nuevo documento
+		$numMax = $this->invoices_model->getNumMax();
+		if(count($numMax)== 0){//14
+			$numMax[0]['order_id'] = 0;
+		}//14f
+		$numMax = base64_encode($numMax[0]['order_id']+1);
+		//vetor para tepaga
+		date_default_timezone_set('America/Bogota');
+		$tpaga = array(	
+			'cost' 				   =>$total,
+		    'purchase_details_url' =>base_url('pay/success/').$numMax,
+		    'voucher_url' 		   =>base_url('pay/detail/').$numMax,
+		    'idempotency_token'    =>$numMax.'-'.$total.'-',
+		    'order_id'             =>base64_decode($numMax),//numero_factura
+		    'terminal_id'          =>base_url(),
+		    'purchase_description' =>'compar wifi Company servicios',
+		    'purchase_items' 	   => [],
+		    'user_ip_address'      => $GLOBALS['_SERVER']['REMOTE_ADDR'],
+		    'expires_at'           => date('Y-m-d\TH:i:s.v', time()+(3600*24))."-05:00",
+		);
+		//guardarfactura
+		$this->invoices_model->setInvoices($tpaga,$usuario[0]['IdUser']);
+		//seagregan los ites de la factura 
+		foreach ($itemsAdd as $key){//15
+			//guardar items factura
+			$insert = array('order_id'=>base64_decode($numMax),
+							'IdPlans'=> $key['IdPlans'], 
+							'Name' 	 => $key['Name'], 
+							'Cost' 	 => $key['Cost'], 
+							'Includ' => $key['Includ'], );
+			$this->invoices_model->setInvoicesDetail($insert);
+			//agregamos elementos vector tepaga 
+			$itemsArray = $key;
+			array_push($tpaga['purchase_items'] , $itemsArray);
+		}//15f		
+		//peticion api tpaga
+		$this->load->helper('api_tpaga_helper');
+		$result = create_tpaga($tpaga);
+		// echo"<pre>";
+		// 	print_r($result);
+		// echo"</pre>";
+		// exit();
+		$jsonResult = json_encode($result);
+		// exit();
+		//guardar respuesta
+		$dd=$this->result_model->setResult(
+					base64_decode($numMax),
+					$usuario[0]['IdUser'],
+					$jsonResult
+				 );
+		// echo"<pre>";
+		// 	print_r($dd);
+		// echo"</pre>";
+		// //redirigir para pago
+		// echo "---------->".$result['tpaga_payment_url'];
+		// echo "seras redirigidoa billetera";
+
+		
+		//retiramos los productos de la session para permitir nuevas compras 
+		
+
+		echo "<pre>";
+			print_r($this->session->userdata());
+		echo "</pre>";
+		//unset($this->session->userdata('shopping'));
+
+		 $this->session->unset_userdata('shopping');
+
+		echo "<pre>";
+			print_r($this->session->userdata());
+		echo "</pre>";
+
+
+
+		exit();
+		redirect($result['tpaga_payment_url']);
+		////////////////////////////////////////////////////////////////	
+	}//6f			
+	//$this->load->view('shopping',$data);
+}
+
 public function itemsAndTotal(){
 	$shopping = $this->session->userdata('shopping');//obtenemos el string de la cantidad de items
 	$countShopping= explode(',', $shopping['0']); //lo pasamos a un vetorpara contarlo
@@ -65,89 +165,22 @@ public function tpaga(){
 			$coutnUser = count($this->user_model->getUser());
 			if ($coutnUser <= 0){//3
 					$this->user_model->setUser();
-					$data['mensaje'] = "Usuario creado con exito";				
+					//$data['mensaje'] = "Usuario creado con exito";	
+					$this->purchase();			
 			}//3f
 		}//2f
 		else{//4
-			$usuario = $this->user_model->getUserLogin();
-			$coutnUser 	 = count($usuario);
-			if ($coutnUser <= 0){//5
-				$data = $this->itemsAndTotal();
-				$data['mensaje'] = "hola! algo esta mal Email/Usuario o clave";
-				$this->load->view('shopping',$data);
-			}//5f
-			else{//6
-				$data = $this->itemsAndTotal();	
-				$total 	  = $data['total'];
-				$itemsAdd = $data['items'];
-				//obtener numero de factura existente + 1 para el nuevo documento
-				$numMax = $this->invoices_model->getNumMax();
-				if(count($numMax)== 0){//14
-					$numMax[0]['order_id'] = 0;
-				}//14f
-				$numMax = base64_encode($numMax[0]['order_id']+1);
-				//vetor para tepaga
-				date_default_timezone_set('America/Bogota');
-				$tpaga = array(	
-					'cost' 				   =>$total,
-				    'purchase_details_url' =>base_url('pay/success/').$numMax,
-				    'voucher_url' 		   =>base_url('pay/detail/').$numMax,
-				    'idempotency_token'    =>$numMax.'-'.$total.'-',
-				    'order_id'             =>base64_decode($numMax),//numero_factura
-				    'terminal_id'          =>base_url(),
-				    'purchase_description' =>'compar wifi Company servicios',
-				    'purchase_items' 	   => [],
-				    'user_ip_address'      => $GLOBALS['_SERVER']['REMOTE_ADDR'],
-				    'expires_at'           => date('Y-m-d\TH:i:s.v', time()+(3600*24))."-05:00",
-				);
-				//guardarfactura
-				$this->invoices_model->setInvoices($tpaga,$usuario[0]['IdUser']);
-				//seagregan los ites de la factura 
-				foreach ($itemsAdd as $key){//15
-					//guardar items factura
-					$insert = array('order_id'=>base64_decode($numMax),
-									'IdPlans'=> $key['IdPlans'], 
-									'Name' 	 => $key['Name'], 
-									'Cost' 	 => $key['Cost'], 
-									'Includ' => $key['Includ'], );
-					$this->invoices_model->setInvoicesDetail($insert);
-					//agregamos elementos vector tepaga 
-					$itemsArray = $key;
-					array_push($tpaga['purchase_items'] , $itemsArray);
-				}//15f		
-				//peticion api tpaga
-				$this->load->helper('api_tpaga_helper');
-				$result = create_tpaga($tpaga);
-				// echo"<pre>";
-				// 	print_r($result);
-				// echo"</pre>";
-				// exit();
-				$jsonResult = json_encode($result);
-				// exit();
-				//guardar respuesta
-				$dd=$this->result_model->setResult(
-							base64_decode($numMax),
-							$usuario[0]['IdUser'],
-							$jsonResult
-						 );
-				// echo"<pre>";
-				// 	print_r($dd);
-				// echo"</pre>";
-				// //redirigir para pago
-				// echo "---------->".$result['tpaga_payment_url'];
-				// echo "seras redirigidoa billetera";
-				redirect($result['tpaga_payment_url']);
-				////////////////////////////////////////////////////////////////	
-			}//6f			
-			//$this->load->view('shopping',$data);
+			$this->purchase();
 		}//4f
 	}//1f
 }
 //exito en la compra
 public function success($invoice = null){
 	if ($invoice=null) {
+		echo"Contacta con administrador";
 	}else{
 		echo base64_decode($invoice);
+
 	}
 }
 //factura dela compra con detalles
