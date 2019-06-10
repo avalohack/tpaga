@@ -20,9 +20,14 @@
   <a class="btn btn-outline-primary" href="<?php echo base_url().'index.php/user/shopping/'?>">Pagar 
         <span id="ShoppingCar">
         <?php 
-          if($shopping>0){
+          if (isset($shopping)) {
+
+
+            if($shopping>0){
               print_r($shopping);
           } 
+          }
+          
         ?> 
         </span>
   </a>

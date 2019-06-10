@@ -11,16 +11,15 @@ public function __construct(){
 	$this->load->model('user_model');
 	$this->load->model('invoices_model');
 	$this->load->model('result_model');
+	$this->load->helper('api_tpaga_helper');
 }
+public function index(){
+	redirect();
+}
+
 
 public function purchase(){
 	$usuario = $this->user_model->getUserLogin();
-
-	echo"<pre>";
-			print_r($usuario);
-	echo"</pre>";
-
-
 	$coutnUser 	 = count($usuario);
 	if ($coutnUser <= 0){//5
 		$data = $this->itemsAndTotal();
@@ -67,7 +66,6 @@ public function purchase(){
 			array_push($tpaga['purchase_items'] , $itemsArray);
 		}//15f		
 		//peticion api tpaga
-		$this->load->helper('api_tpaga_helper');
 		$result = create_tpaga($tpaga);
 		// echo"<pre>";
 		// 	print_r($result);
@@ -88,29 +86,21 @@ public function purchase(){
 		// echo "---------->".$result['tpaga_payment_url'];
 		// echo "seras redirigidoa billetera";
 
-		
-		//retiramos los productos de la session para permitir nuevas compras 
-		
-
-		echo "<pre>";
-			print_r($this->session->userdata());
-		echo "</pre>";
+		// echo "<pre>";
+		// 	print_r($this->session->userdata());
+		// echo "</pre>";
 		//unset($this->session->userdata('shopping'));
-
 		 $this->session->unset_userdata('shopping');
-
-		echo "<pre>";
-			print_r($this->session->userdata());
-		echo "</pre>";
-
-
-
-		exit();
+		// echo "<pre>";
+		// 	print_r($this->session->userdata());
+		// echo "</pre>";
 		redirect($result['tpaga_payment_url']);
 		////////////////////////////////////////////////////////////////	
 	}//6f			
 	//$this->load->view('shopping',$data);
 }
+
+
 
 public function itemsAndTotal(){
 	$shopping = $this->session->userdata('shopping');//obtenemos el string de la cantidad de items
@@ -164,9 +154,9 @@ public function tpaga(){
 		if ($clave == $clave2){//2
 			$coutnUser = count($this->user_model->getUser());
 			if ($coutnUser <= 0){//3
-					$this->user_model->setUser();
-					//$data['mensaje'] = "Usuario creado con exito";	
-					$this->purchase();			
+				$this->user_model->setUser();
+				//$data['mensaje'] = "Usuario creado con exito";
+				$this->purchase();						
 			}//3f
 		}//2f
 		else{//4
@@ -174,131 +164,52 @@ public function tpaga(){
 		}//4f
 	}//1f
 }
-//exito en la compra
+
+/**
+ * success nos permite saber si la 
+ * compra fue satisfactoria para pasar el estado de la factura a pagada
+ * @param type|null $invoice 
+ */
 public function success($invoice = null){
-	if ($invoice=null) {
-		echo"Contacta con administrador";
-	}else{
-		echo base64_decode($invoice);
+	if (!$invoice==null){
+		$invoice = base64_decode($invoice);
+		//echo $invoice;
+		$result = $this->result_model->getResult($invoice);
+		$result = json_decode($result[0]['result'],true);		
+		// print_r($result['token']);
+		$confirmPay = confirm_pay($result['token']);
 
+		$result['token'] = 'paid'; //quitr esta linea-----
+
+		if ($result['token'] == 'paid' or $result['token'] == 'delivered'){
+			$this->invoices_model->setInvoicePay($invoice);
+			$this->load->view('paySuccess');
+		}else{
+			redirect('user');
+		}
+		// echo"<pre>";
+		// 	print_r($confirmPay['status']);
+		// echo"</pre>";		
+		// exit();
+		// $this->invoices_model->setInvoicePay($invoice);
 	}
+	else{
+		redirect();
+	}
+
 }
-//factura dela compra con detalles
+
+
+/**
+ * factura dela compra con detalles
+ * @param type|null $invoice 
+ */
 public function detail($invoice = null){
-	if ($invoice=null) {
-	}else{
+	if (!$invoice==null){
 		echo base64_decode($invoice);
 	}
+	else{
+		redirect();
+	}
 }
-	
-
-
-}
-
-// print_r($data);
-// print_r($usuario);
-// print_r($tpaga);
-// echo date('Y-m-d\TH:i:s.v',  time())."-05:00";
-// echo "<br>";
-// echo "mas 23 horas <br>";
-// echo date('Y-m-d\TH:i:s.v',  time()+(3600*24))."-05:00";
-// $Hora = Time(); // Hora actual   
-// print_r($Hora);
-// echo "<br>";
-// echo date('H:i:s:u a',$Hora)."";      
-//  echo "<br>";
-// $Hora = Time() + (60 *60 * 12);   
-// echo date('H:i:s:u a',$Hora); // + 12 horas
-// exit();
-
-// login
-// $usuario = $this->user_model->getUserLogin();
-
-// 		echo"<pre>";
-// 			print_r($usuario);
-// 		echo"</pre>";
-
-// 		echo "<br> count ".count($usuario)."<br>";
-
-// 		$user_session = array(
-// 				     'session_id'    => $cookie=1,
-// 				     'ip_address'    => $GLOBALS['_SERVER']['REMOTE_ADDR'],
-// 				     'user_agent'    => $GLOBALS['_SERVER']['HTTP_USER_AGENT'],
-// 				     'last_activity' => '88888845',
-// 			);	
-// 			$this->session->set_userdata($user_session);
-
-// 		echo"<pre>";
-// 			print_r($this->session->userdata());
-// 		echo"</pre>";
-
-
-				//$data['mensaje'] = "iniciar session";
-				//peticion de pago
-				//echo $data['mensaje'];
-				//$this->load->view('shopping',$data);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-////////////////////////
-////////////////////////
-////////////////////////
-/////////////////////
-/////////////////////////
-//////////////////////////
-// Array
-// (
-//     [miniapp_user_token] => 
-//     [cost] => 3.0
-//     [purchase_details_url] => https://192.168.1.79/tpaga/pay/success/Ng==
-//     [voucher_url] => https://192.168.1.79/tpaga/pay/detail/Ng==
-//     [idempotency_token] => Ng==-3-
-//     [order_id] => 6
-//     [terminal_id] => https://192.168.1.79/tpaga/
-//     [purchase_description] => compar wifi Company servicios
-//     [purchase_items] => Array
-//         (
-//             [0] => Array
-//                 (
-//                     [cantidad] => 1
-//                     [IdPlans] => 1
-//                     [Name] => Semanal
-//                     [Cost] => 1
-//                     [Includ] => Incluye Uno (1) Usuarios
-//                 )
-
-//             [1] => Array
-//                 (
-//                     [cantidad] => 2
-//                     [IdPlans] => 2
-//                     [Name] => Mensual
-//                     [Cost] => 2
-//                     [Includ] => Incluye Uno (2) Usuarios
-//                 )
-
-//         )
-
-//     [user_ip_address] => 192.168.1.79
-//     [merchant_user_id] => 
-//     [token] => pr-1d4eeb13152c4c4bbed83477c62ac1e15b1a986f766767bb64b3ea37a73843ea67dfcc05
-//     [tpaga_payment_url] => https://w.tpaga.co/eyJtIjp7Im8iOiJQUiJ9LCJkIjp7InMiOiJtZWRpY2FwcCIsInBydCI6InByLTFkNGVlYjEzMTUyYzRjNGJiZWQ4MzQ3N2M2MmFjMWUxNWIxYTk4NmY3NjY3NjdiYjY0YjNlYTM3YTczODQzZWE2N2RmY2MwNSJ9fQ==
-//     [status] => created
-//     [expires_at] => 2019-06-01T17:02:39.000-05:00
-//     [cancelled_at] => 
-//     [checked_by_merchant_at] => 
-//     [delivery_notification_at] => 
-// )
+}//fin

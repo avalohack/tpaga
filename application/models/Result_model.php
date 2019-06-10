@@ -8,7 +8,12 @@ class Result_model extends CI_Model{
 			     	   'result'  =>$jsonResult);		
 		return $this->db->insert('result',$vector);
 	}
-
+	public function getResult($invoice){
+		$sql = 'SELECT result FROM result';
+		$sql.= ' WHERE order_id = '.$invoice;
+		$query=$this->db->query($sql);
+		return $query->result_array();
+	}
 }
 
 

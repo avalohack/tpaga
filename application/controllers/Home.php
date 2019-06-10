@@ -1,3 +1,8 @@
+https://payment-links.docs.tpaga.co/quickstart.html
+https://payment-links.docs.tpaga.co/quickstart.html#pyos-delivery-label
+http://jsonviewer.stack.hu/
+
+
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 

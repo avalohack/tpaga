@@ -16,6 +16,11 @@ class User extends CI_Controller {
 		$this->load->view('user');
 	}
 
+	public function login()
+	{
+		$this->load->view('login');
+	}
+
 
 	public function shopping()
 	{

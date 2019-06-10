@@ -26,8 +26,14 @@ class Invoices_model extends CI_Model{
 		return $this->db->insert('invoices',$tpaga);
 	}
 
-		public function setInvoicesDetail($key){
+	public function setInvoicesDetail($key){
 		return $this->db->insert('invoicedetail',$key);
+	}
+
+	public function setInvoicePay($numInvoice){
+		$data = array('pay' => '1');
+		$this->db->where('order_id', $numInvoice);
+		return $this->db->update('invoices',$data);
 	}
 }
 
