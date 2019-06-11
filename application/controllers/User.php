@@ -8,19 +8,43 @@ class User extends CI_Controller {
 		$this->load->helper("url");
 		$this->load->helper("form");
         $this->load->library('session');
-
+		$this->load->library('form_validation');//formatea los valores pasados de un formulario
+		$this->load->model('user_model');
+		$this->load->model('invoices_model');
 	}
 
-	public function index()
-	{
-		$this->load->view('user');
-	}
-
-	public function login()
-	{
+	public function index(){
 		$this->load->view('login');
 	}
+	public function dashboard(){
 
+		$data['invoices'] = $this->invoices_model->getInvoices();
+
+		// echo "<pre>";
+		// 	print_r($data = $this->session->userdata());
+		// echo "</pre>";	
+		// $data['planes'] = 2;
+		$this->load->view('dashboard',$data);
+	}
+
+	public function login(){
+		$this->form_validation->set_rules('inputEmail', 'inputEmail', 'required|trim',array('required' => 'Campo %s Obligatorio '));
+		if ($this->form_validation->run() == FALSE){//vista
+		}
+		else{//1
+			$user = $this->user_model->getUser();
+			$coutnUser = count($user);
+				if ($coutnUser > 0){
+						$user_session = array("Usuario" => $user[0]);
+						$this->session->set_userdata($user_session);
+						redirect('user/dashboard');
+				}
+				else{
+						$data['mensaje'] = "hola! algo esta mal Email/Usuario o clave";
+				}
+		}
+		$this->load->view('login',$data);
+	}
 
 	public function shopping()
 	{

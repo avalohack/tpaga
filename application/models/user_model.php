@@ -6,7 +6,7 @@ class User_model extends CI_Model{
 		
 		$email = $this->input->post('inputEmail');  
 		
-		$sql=" SELECT Email FROM users";
+		$sql=" SELECT Email,IdUser,Tipo,Nickname,Phone FROM users";
 		$sql.=" WHERE email = '".$email."'";
 		$query=$this->db->query($sql);
 		return $query->result_array();	

@@ -3,54 +3,41 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  include 'include/head.php';
 ?>
 
-
-
-vista de usuario
-login
-
-
 <div class="container">
-  <div class="card-deck mb-3 text-center">
-		<div class="card mb-4 shadow-sm">      
-			<!--   <div class="card-header">
-			    <h4 class="my-0 font-weight-normal"><?php //echo $value['Name'] ?></h4>
-			  </div>
-			  <div class="card-body">
-			    <h1 class="card-title pricing-card-title"><?php //echo $value['Cost'] ?> <small class="text-muted">$</small></h1>
-			    <ul class="list-unstyled mt-3 mb-4">
-			      <li><?php //echo $value['Includ'] ?></li>
-			    </ul>
-			    <button onclick="AddProduct(<?php //echo  $value['IdPlans']; ?>)" type="button" class="btn btn-lg btn-block btn-primary">Agregar</button>
-			  </div> -->
-		</div>
+    <div class="modal-dialog">
+      <div class="modal-content">      
+        <div class="modal-header">
+              <h4 class="modal-title">Login</h4>
+        </div>   
+        <div class="modal-body">
+              <?php $attributes = array('name' =>'formUser');
+                echo form_open('user/login',$attributes); 
+              ?>
+                <input type="email" name="inputEmail" class="form-control" placeholder="Email o Usuario" required="" autofocus="">
+                <input type="password" name="inputPassword" class="form-control" placeholder="Clave" required=""> 
 
-		<div class="card mb-4 shadow-sm">      
-			  <div class="card-header">
-			    <h4 class="my-0 font-weight-normal"><?php //echo $value['Name'] ?></h4>
-			  </div>
-			  <div class="card-body">
-			    <h1 class="card-title pricing-card-title"><?php //echo $value['Cost'] ?> <small class="text-muted">$</small></h1>
-			    <ul class="list-unstyled mt-3 mb-4">
-			      <li><?php //echo $value['Includ'] ?></li>
-			    </ul>
-			    <button onclick="AddProduct(<?php //echo  $value['IdPlans']; ?>)" type="button" class="btn btn-lg btn-block btn-primary">Agregar</button>
-			  </div>
-		</div>
-		<div class="card mb-4 shadow-sm">      
-			 <!--  <div class="card-header">
-			    <h4 class="my-0 font-weight-normal"><?php //echo $value['Name'] ?></h4>
-			  </div>
-			  <div class="card-body">
-			    <h1 class="card-title pricing-card-title"><?php //echo $value['Cost'] ?> <small class="text-muted">$</small></h1>
-			    <ul class="list-unstyled mt-3 mb-4">
-			      <li><?php //echo $value['Includ'] ?></li>
-			    </ul>
-			    <button onclick="AddProduct(<?php //echo  $value['IdPlans']; ?>)" type="button" class="btn btn-lg btn-block btn-primary">Agregar</button>
-			  </div> -->
-		</div>
-  </div>
+                 <button type="submit" class="btn btn-lg btn-block btn-primary">Login</button>
+                 <?php if (isset($mensaje)) {
+                      echo "<h3>".$mensaje."</h3>";
+                    }
+                 ?>
+              </form>
+        </div> 
+      </div> 
+    </div>
 </div>
 
+
+
+
+
+    <!-- Remind Passowrd -->
+    <div id="formFooter">
+      <a class="underlineHover" href="#">Forgot Password?</a>
+    </div>
+
+  </div>
+</div>
 
 
 

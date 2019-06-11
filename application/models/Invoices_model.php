@@ -35,6 +35,27 @@ class Invoices_model extends CI_Model{
 		$this->db->where('order_id', $numInvoice);
 		return $this->db->update('invoices',$data);
 	}
+
+	public function getInvoices(){
+		$data = $this->session->userdata('Usuario');
+
+		// $sql = 'SELECT * FROM invoices';
+		// $sql.= ' WHERE IdUser  = ';
+		// $sql.= $data['IdUser'];
+		// $sql.= ' and';
+		// $sql.= ' pay = 1';
+
+		$sql = 'SELECT * FROM invoices';
+		$sql.= ' inner JOIN invoicedetail';
+		$sql.= ' on invoices.order_id = invoicedetail.order_id';
+		$sql.= ' WHERE IdUser  = ';
+		$sql.= $data['IdUser'];
+		$sql.= ' and';
+		$sql.= ' pay = 1';
+
+		$query=$this->db->query($sql);
+		return $query->result_array();
+	}
 }
 
 
