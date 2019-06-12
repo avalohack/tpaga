@@ -22,6 +22,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     }
                  ?>
               </form>
+                <!-- Remind Passowrd -->
+                <div id="formFooter">
+                  <a class="underlineHover" href="#">¿Se te olvidó tu contraseña?</a>
+                </div>
         </div> 
       </div> 
     </div>
@@ -31,10 +35,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 
 
-    <!-- Remind Passowrd -->
-    <div id="formFooter">
-      <a class="underlineHover" href="#">Forgot Password?</a>
-    </div>
+
 
   </div>
 </div>

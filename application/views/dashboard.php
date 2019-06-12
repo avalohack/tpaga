@@ -15,7 +15,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	    <div class="card mb-4 shadow-sm">
 			
 			<div class="card-header">
-			    <h4 class="my-0 font-weight-normal">Facturas</h4>
+				
+				<?php
+				$Tipo = 99;
+					if($Tipo == 99){
+				 		echo 'Buscar factura'. $Tipo;
+
+					}
+
+				?>
+			    <h4 class="my-0 font-weight-normal">Servicios adquiridos</h4>
 			</div>
 	    	
 		 	<div class="card-body">
@@ -23,7 +32,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		 		<div class="row">
 		 			<div class="col-md-12">
 		 				<?php
-		 				if(count($invoices)==0){?>
+		 				if(count($ServicesAcquired)==0){?>
 		 						<h4 class="card-title border-top ">No
 		 							<small class="text-muted"> 
 		 								Has comprado ningun plan, si ya compraste un plan contacta con soporte 
@@ -34,13 +43,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		 				else{
 
 		 				// 	echo "<pre>";
-							// 	print_r($invoices);
+							// 	print_r($ServicesAcquired);
 							// echo "</pre>";
 
-		 					foreach ($invoices as $key => $value) {?>
+		 					foreach ($ServicesAcquired as $key => $value) {?>
 		 						<h4 class="card-title border-top ">factura #<?php echo $value['order_id'] ;?>
-		 							<small class="text-muted">Valor pagado $<?php echo $value['cost'] ;?></small>
+		 							<small class="text-muted">
+		 								producto   <?php echo $value['IdPlans'] ;?>
+		 								duraccion  <?php echo $value['Name'] ;?>
+		 								Valor      <?php echo $value['Cost'] ;?>
+		 								descripción<?php echo $value['Includ'] ;?>
 									<a href=""> Detalles</a>
+		 							</small>
 		 						</h4>
 		 					<?php		
 		 					}				

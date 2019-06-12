@@ -37,7 +37,17 @@ class Invoices_model extends CI_Model{
 	}
 
 	public function getInvoices(){
+		
+	}
+
+	public function getServicesAcquired(){
 		$data = $this->session->userdata('Usuario');
+		// select 
+		// i.order_id,id.IdPlans,id.Name,id.Cost,id.Includ  
+		// FROM  invoices AS i  
+		// INNER join  invoicedetail AS id on
+		// i.order_id = id.order_id where i.pay=1 and  i.IdUser = 2
+
 
 		// $sql = 'SELECT * FROM invoices';
 		// $sql.= ' WHERE IdUser  = ';
@@ -45,13 +55,21 @@ class Invoices_model extends CI_Model{
 		// $sql.= ' and';
 		// $sql.= ' pay = 1';
 
-		$sql = 'SELECT * FROM invoices';
-		$sql.= ' inner JOIN invoicedetail';
-		$sql.= ' on invoices.order_id = invoicedetail.order_id';
-		$sql.= ' WHERE IdUser  = ';
-		$sql.= $data['IdUser'];
-		$sql.= ' and';
-		$sql.= ' pay = 1';
+		// $sql = 'SELECT * FROM invoices';
+		// $sql.= ' inner JOIN invoicedetail';
+		// $sql.= ' on invoices.order_id = invoicedetail.order_id';
+		// $sql.= ' WHERE IdUser  = ';
+		// $sql.= $data['IdUser'];
+		// $sql.= ' and';
+		// $sql.= ' pay = 1';
+
+
+		$sql  =' select i.order_id,id.IdPlans,id.Name,id.Cost,id.Includ ';
+		$sql .=' FROM  invoices AS i ';
+		$sql .=' INNER join  invoicedetail AS id on';
+		$sql .=' i.order_id = id.order_id';
+		$sql .=' where i.pay=1 and  i.IdUser = ';
+		$sql .= $data['IdUser'];
 
 		$query=$this->db->query($sql);
 		return $query->result_array();

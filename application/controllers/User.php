@@ -18,10 +18,17 @@ class User extends CI_Controller {
 	}
 	public function dashboard(){
 
-		$data['invoices'] = $this->invoices_model->getInvoices();
+		$usuario = $this->session->userdata('Usuario');
+		$data['Tipo'] = $usuario['Tipo'];
+		// if ($usuario['Tipo']) {
+		// 	$data['Invoices'] = $this->invoices_model->getInvoices();
+		// }
+		
+		$data['ServicesAcquired'] = $this->invoices_model->getServicesAcquired();
+
 
 		// echo "<pre>";
-		// 	print_r($data = $this->session->userdata());
+		// 	print_r($this->session->userdata('Usuario'));
 		// echo "</pre>";	
 		// $data['planes'] = 2;
 		$this->load->view('dashboard',$data);
@@ -43,7 +50,7 @@ class User extends CI_Controller {
 						$data['mensaje'] = "hola! algo esta mal Email/Usuario o clave";
 				}
 		}
-		$this->load->view('login',$data);
+		$this->load->view('login');
 	}
 
 	public function shopping()
