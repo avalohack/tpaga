@@ -36,8 +36,12 @@ class Invoices_model extends CI_Model{
 		return $this->db->update('invoices',$data);
 	}
 
-	public function getInvoices(){
-		
+	public function getInvoices($invoice){
+		$sql  ='SELECT cost,idempotency_token,order_id,expires_at,IdUser,Timestamp,pay';
+		$sql .=' FROM invoices WHERE order_id = ';
+		$sql .=$invoice;
+		$query=$this->db->query($sql);
+		return $query->result_array();
 	}
 
 	public function getServicesAcquired(){
@@ -47,7 +51,6 @@ class Invoices_model extends CI_Model{
 		// FROM  invoices AS i  
 		// INNER join  invoicedetail AS id on
 		// i.order_id = id.order_id where i.pay=1 and  i.IdUser = 2
-
 
 		// $sql = 'SELECT * FROM invoices';
 		// $sql.= ' WHERE IdUser  = ';

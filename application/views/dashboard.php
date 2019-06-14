@@ -32,8 +32,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 								<!-- caja para buscar documentos inicio -->
 					            <h2>Buscar Factura</h2>
+					            <input type="text" name="reversePay" id="reversePay" class="form-control" placeholder="Ingresa el numero de factura" onkeyup="reversePay()">
 					          	<!-- caja para buscar documentos fin -->
-					         	 <div id="load"></div>
+					         	<div id="load"></div>
 
 
 		        		
@@ -50,8 +51,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   const typo_peticion ="POST";
   const load          = "<?php echo base_url();?>vendor/img/load.gif";//imagenloa
   const url_peticion  = "Buscar_documentos/documento/";
-  //console.log(base_url+"vendor/img/load.gif");
-  <?php  include 'include/buscar_documento.php';?> 
 </script>
 
 
@@ -106,7 +105,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 <?php
  include 'include/footer.php';
- include 'include/jsOcultarCambios.php';
+ include 'include/revertirElPago.php';
  include 'include/end.php';
 ?>
 
