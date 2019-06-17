@@ -16,17 +16,16 @@ class User extends CI_Controller {
 	public function index(){
 		$this->load->view('login');
 	}
+
+
 	public function dashboard(){
 
 		$usuario = $this->session->userdata('Usuario');
 		$data['Tipo'] = $usuario['Tipo'];
 		// if ($usuario['Tipo']) {
 		// 	$data['Invoices'] = $this->invoices_model->getInvoices();
-		// }
-		
+		// }		
 		$data['ServicesAcquired'] = $this->invoices_model->getServicesAcquired();
-
-
 		// echo "<pre>";
 		// 	print_r($this->session->userdata('Usuario'));
 		// echo "</pre>";	

@@ -13,15 +13,46 @@ class Invoices extends CI_Controller {
 	}
 
 
-	public function reversePay($invoice=null){
+	public function getReversePay($invoice=null){
 		$usuario = $this->session->userdata('Usuario');
-		if(($invoice <> null) and ($usuario['Tipo']==99)){
+
+		if($invoice <> null && $usuario['Tipo']==99){
 			$invoiceResult =  $this->invoices_model->getInvoices($invoice);
-			echo json_encode($invoiceResult[0]);
+			if (count($invoiceResult) < 1) {
+				echo json_encode("null");
+			}else{
+
+				$url = base_url()."invoices/getReversePay/".$invoiceResult[0]['order_id'];
+				$url = array('urlReversePay' => $url );
+				$vector = $invoiceResult[0]+$url;
+				// echo "<pre>";
+				// 	print_r($vector);
+				// echo "</pre>";
+
+				echo json_encode($vector);
+			}
+			
 		}else{
 			echo json_encode("null");			
 		}
 	}
+
+	public function setReversePay($invoice=null){
+		$usuario = $this->session->userdata('Usuario');
+
+		if($invoice <> null && $usuario['Tipo']==99){
+			$invoiceResult =  $this->invoices_model->getInvoices($invoice);
+			if (count($invoiceResult) < 1) {
+				echo json_encode("null");
+			}else{
+				echo json_encode($invoiceResult[0]);
+			}
+			
+		}else{
+			redirect();			
+		}
+	}
+
 
 
 
