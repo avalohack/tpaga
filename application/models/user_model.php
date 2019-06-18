@@ -15,8 +15,8 @@ class User_model extends CI_Model{
 	public function setUser(){	
         $Email 	  =$this->input->post('inputEmail');
         $Password =sha1($this->input->post('inputPassword'));
-        if($this->input->post('Nickname')){
-        	$Nickname =$this->input->post('Nickname');
+        if($this->input->post('inputNickname')){
+        	$Nickname =$this->input->post('inputNickname');
         }
         else{
         	$Nickname = null;

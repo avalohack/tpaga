@@ -22,7 +22,7 @@ class Invoices extends CI_Controller {
 				echo json_encode("null");
 			}else{
 
-				$url = base_url()."invoices/getReversePay/".$invoiceResult[0]['order_id'];
+				$url = base_url()."invoices/setReversePay/".$invoiceResult[0]['order_id'];
 				$url = array('urlReversePay' => $url );
 				$vector = $invoiceResult[0]+$url;
 				// echo "<pre>";
@@ -41,13 +41,29 @@ class Invoices extends CI_Controller {
 		$usuario = $this->session->userdata('Usuario');
 
 		if($invoice <> null && $usuario['Tipo']==99){
-			$invoiceResult =  $this->invoices_model->getInvoices($invoice);
-			if (count($invoiceResult) < 1) {
-				echo json_encode("null");
+			$this->load->model('result_model');
+			$result = $this->result_model->getResult($invoice);
+			$result = json_decode($result[0]['result'],true);
+
+			$payload ='{"payment_request_token":"'.$result['token'].'"}';
+					
+			$this->load->helper('api_tpaga_helper');
+			$result = reverse_pay($payload);
+
+			if(isset($result['error_code'])){
+				$error = array('error_code' => $result['error_code']);
+				echo json_encode($error);
+				exit();
 			}else{
-				echo json_encode($invoiceResult[0]);
-			}
-			
+				$this->invoices_model->setReversePay($invoice,$usuario['IdUser']);
+				$reversePay = array('order_id' => $invoice,
+									'result'   => json_encode($result),
+									'idAdmin'  =>['IdUser']);
+				$this->load->model('reversepay_model');
+				$this->reversepay_model->setReversePay($reversePay);
+				echo json_encode('ok');
+				exit();
+			}			
 		}else{
 			redirect();			
 		}

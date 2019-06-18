@@ -10,13 +10,23 @@
 //  https://es.stackoverflow.com/questions/118800/ejecutar-funci%C3%B3n-cuando-el-usuario-termina-de-escribir-en-lugar-de-onkeyup
 //  https://desarrolloweb.com/articulos/fetch-ajax-javascript.html
 
+function setReversePay(url){
+	const typo_peticion ="POST";
+	var miInit = { method: typo_peticion};
+	fetch(url,miInit)
+	.then(dataWrappedByPromise => dataWrappedByPromise.json())
+	.then(data => {console.log(data)
 
+		document.getElementById("mensaje").innerHTML=
+		'<div class="alert alert-success alert-dismissable">'+
+		  '<button type="button" class="close" data-dismiss="alert">&times;</button>'+
+		  '<strong>¡'+data+'! </strong> pago retornado.'+
+		'</div>'
+	})
+}
 
 function reversePay(){
-	var x = document.getElementById("reversePay");
-	x = x.value;
-	alert(x);
-
+	var documento = document.getElementById("reversePay");
 	var miInit = { method: typo_peticion,
              	   //headers: misCabeceras,
               	   //mode: 'cors',
@@ -24,7 +34,7 @@ function reversePay(){
                    //body: data 
                	};
 
-	fetch(url_peticion+x,miInit)
+	fetch(url_peticion+documento.value,miInit)
 	.then(dataWrappedByPromise => dataWrappedByPromise.json())
 	.then(data => {
     // you can access your data here
@@ -38,9 +48,9 @@ function reversePay(){
 		'<div class="card-body">'+
 			'<div class="row">'+
 			 	'<div class="col-md-12">'+
-					'<h4 class="card-title border-top ">'+'Valor Pagado: $' + data.cost + ' #factura: '+ data.order_id+
+					'<h4 class="card-title border-top " id="mensaje">'+'Valor Pagado: $' + data.cost + ' #factura: '+ data.order_id+
 						'<small class="text-muted"> '+
-							'<a href="'+"<?php echo base_url();?>"+'invoices/setReversePay/">Revertir el pago</a>'+
+							'<a href="#" onclick="setReversePay(\''+data.urlReversePay+'\')">Revertir el pago</a>'+
 						'</small>'+
 					'</h4>'+
 			 	'</div>'+

@@ -90,17 +90,23 @@ public function purchase(){
 		// 	print_r($this->session->userdata());
 		// echo "</pre>";
 		//unset($this->session->userdata('shopping'));
-		 $this->session->unset_userdata('shopping');
 		// echo "<pre>";
 		// 	print_r($this->session->userdata());
-		// echo "</pre>";
-		redirect($result['tpaga_payment_url']);
+		// echo "</pre>";/
+		 //echo "hola mundo";
+		 $data['url_pago'] = $result['tpaga_payment_url'];
+		 $this->load->view('pay',$data);
+		 $this->session->unset_userdata('shopping');
+		//redirect($result['tpaga_payment_url']);
 		////////////////////////////////////////////////////////////////	
 	}//6f			
 	//$this->load->view('shopping',$data);
 }
 
-
+public function prueba(){
+	$data['url_pago'] = "hola";
+		 $this->load->view('pay',$data);
+}
 
 public function itemsAndTotal(){
 	$shopping = $this->session->userdata('shopping');//obtenemos el string de la cantidad de items

@@ -48,7 +48,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 <script> 
   const typo_peticion ="POST";
- // const load          = "<?php echo base_url();?>vendor/img/load.gif";//imagenloa
   const url_peticion  = "<?php echo base_url();?>invoices/getReversePay/";
 </script>
 
@@ -104,6 +103,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 <?php
  include 'include/footer.php';
+ include 'include/bootstrap.php';
  include 'include/revertirElPago.php';
  include 'include/end.php';
 ?>

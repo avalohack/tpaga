@@ -91,7 +91,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 						</div>	
 
-		 				 <button type="submit" class="btn btn-lg btn-block btn-primary">Pagar</button>
+		 				 <button type="submit" class="btn btn-lg btn-block btn-primary">Login</button>
 		 				 <?php if (isset($mensaje)) {
 		 				 			echo "<h3>".$mensaje."</h3>";
 		 						}

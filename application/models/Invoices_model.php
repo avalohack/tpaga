@@ -31,7 +31,14 @@ class Invoices_model extends CI_Model{
 	}
 
 	public function setInvoicePay($numInvoice){
-		$data = array('pay' => '1');
+		$data = array('pay' => '1',);
+		$this->db->where('order_id', $numInvoice);
+		return $this->db->update('invoices',$data);
+	}
+
+	public function setReversePay($numInvoice,$idAdmin){
+		$data = array('pay'    => '2',
+					  'idAdmin'=> $idAdmin);
 		$this->db->where('order_id', $numInvoice);
 		return $this->db->update('invoices',$data);
 	}

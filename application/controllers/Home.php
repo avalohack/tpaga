@@ -1,9 +1,7 @@
-https://payment-links.docs.tpaga.co/quickstart.html
-https://payment-links.docs.tpaga.co/quickstart.html#pyos-delivery-label
-http://jsonviewer.stack.hu/
-
-
 <?php
+// https://payment-links.docs.tpaga.co/quickstart.html
+// https://payment-links.docs.tpaga.co/quickstart.html#pyos-delivery-label
+// http://jsonviewer.stack.hu/
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Home extends CI_Controller {
