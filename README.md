@@ -36,9 +36,9 @@ En este template se ve el detalle de la orden realizada y se piden datos para va
 
 
 <p align="center">
-	<img src="http://vacasenvuelo.com/tpaga/img/agregar_items.gif" alt="" height="90%" width="90%">
-	<img src="http://vacasenvuelo.com/tpaga/img/login.gif" alt="" height="90%" width="90%">
-	<img src="http://vacasenvuelo.com/tpaga/img/pagar.gif" alt="" height="90%" width="90%">
+	<img src="http://vacasenvuelo.com/tpaga/img/agregar_items.gif" alt="" height="637px" width="300px">
+	<img src="http://vacasenvuelo.com/tpaga/img/login.gif" alt="" height="637px" width="300px">
+	<img src="http://vacasenvuelo.com/tpaga/img/pagar.gif" alt="" height="637px" width="300px">
 </p>
 
 
