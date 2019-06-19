@@ -17,8 +17,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 
 <?php
-	$Tipo = 99;
-		echo 'Buscar factura'. $Tipo;
 	if($Tipo == 99){
 ?>
 		<div class="card-deck mb-3 ">
