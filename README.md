@@ -35,7 +35,7 @@ Las actividades de desarrolló  las organicé de la siguiente manera :
 En este template se ve el detalle de la orden realizada y se piden datos para validar la compra si el usuario es nuevo despliega las opciones de registro sino solo procede a pagar  <br>
 
 
-><p align="center"><img src="http://vacasenvuelo.com/tpaga/img/agregar_items.gif" alt="" height="640px" width="303px"><img src="http://vacasenvuelo.com/tpaga/img/login.gif" alt="" height="640px" width="303px"><img src="http://vacasenvuelo.com/tpaga/img/pagar.gif" alt="" height="640px" width="303px"></p>
+<p align="center"><img src="http://vacasenvuelo.com/tpaga/img/agregar_items.gif" alt="" height="640px" width="303px"><img src="http://vacasenvuelo.com/tpaga/img/login.gif" alt="" height="640px" width="303px"><img src="http://vacasenvuelo.com/tpaga/img/pagar.gif" alt="" height="640px" width="303px"></p>
 
 
 - **Después de registrar el usuario o iniciar sesión se le pide al usuario dar al clic al botón pagar al usuario** esto fue porque a google chrome  no le gustan las redirecciones en una redirección de cabeceras para evitar fallas<br>
