@@ -58,13 +58,13 @@ function reversePay(){
 		'</div>'+
 	'</div>'+
 '</div>' 
-			console.log(data.cost)
-			console.log(data.idempotency_token)
-			console.log(data.order_id)
-			console.log(data.expires_at)
-			console.log(data.IdUser)
-			console.log(data.Timestamp)
-			console.log(data.pay)
+			// console.log(data.cost)
+			// console.log(data.idempotency_token)
+			// console.log(data.order_id)
+			// console.log(data.expires_at)
+			// console.log(data.IdUser)
+			// console.log(data.Timestamp)
+			// console.log(data.pay)
 
 	
 

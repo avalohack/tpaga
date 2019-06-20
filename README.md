@@ -33,6 +33,7 @@ Las actividades de desarrolló  las organicé de la siguiente manera :
 ### Inicio permite agregar al carro para des pues pagar los servicios  
 - **Página carro de compras** 
 En este template se ve el detalle de la orden realizada y se piden datos para validar la compra si el usuario es nuevo despliega las opciones de registro sino solo procede a pagar  <br>
+- **Después de registrar el usuario o iniciar sesión se le pide al usuario dar al clic al botón pagar al usuario** esto fue porque a google chrome  no le gustan las redirecciones en una redirección de cabeceras para evitar fallas<br>
 
 
 <p align="center">
@@ -40,10 +41,6 @@ En este template se ve el detalle de la orden realizada y se piden datos para va
 	<img src="http://vacasenvuelo.com/tpaga/img/login2.gif" alt="" height="627px" width="290px">
 	<img src="http://vacasenvuelo.com/tpaga/img/pagar2.gif" alt="" height="627px" width="290px">
 </p>
-
-
-- **Después de registrar el usuario o iniciar sesión se le pide al usuario dar al clic al botón pagar al usuario** esto fue porque a google chrome  no le gustan las redirecciones en una redirección de cabeceras para evitar fallas<br>
-
 
 
 ## Tabla de URLs
@@ -62,7 +59,7 @@ Para autenticarse en la aplicación como un operador del comercio, entre al apli
 **Usuario** *demo@demo.com* <br>
 **Contraseña** *demo*
 
-###usuario 
+ 
 **Usuario** *demo2@demo.com* <br>
 **Contraseña** *demo*
 
@@ -73,4 +70,37 @@ y ver las transacciones no pagadas
 no fueron muchos los inconvenientes dado que se desplego en un webhost "buehost". inconvenientes. al desarrollar en Windows y pasar aun web host LINUX se presentaron errores con las promesas js para buscar facturas
 
 El aplicativo se encuentra disponible en : https://vacasenvuelo.com/tpaga
+
+## Configuracion de la aplicacion para usar en otro servidor
+**config.php** hosting \tpaga\application\config\config.php
+> por la linea 27 encuentras  $config['base_url'] = 'https://tudominio/tpaga';
+
+
+---imgen
+
+
+## Configuracion de la aplicacion para usar en otro servidor
+**database.php.php** hosting \tpaga\application\config\database.php
+>lineas 76 a 96
+> $db['default'] = array(
+>		'dsn'	=> '',
+>		'hostname' => 'ejemplo.com',
+>		'username' => 'admin',
+>		'password' => '123456',
+>		'database' => 'tpaga',
+>		'dbdriver' => 'mysqli',
+>		'dbprefix' => '',
+>		'pconnect' => FALSE,
+>		'db_debug' => (ENVIRONMENT !== 'production'),
+>		'cache_on' => FALSE,
+>		'cachedir' => '',
+>		'char_set' => 'utf8',
+>		'dbcollat' => 'utf8_general_ci',
+>		'swap_pre' => '',
+>		'encrypt' => FALSE,
+>		'compress' => FALSE,
+>		'stricton' => FALSE,
+>		'failover' => array(),
+>		'save_queries' => TRUE
+>	);
 
