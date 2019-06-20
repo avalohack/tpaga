@@ -46,10 +46,12 @@ En este template se ve el detalle de la orden realizada y se piden datos para va
 ## Tabla de URLs
 Función | URL
 ------------ | -------------
-Inicio | https://vacasenvuelo.com/tpaga
+Inicio | https://vacasenvuelo.com/tpaga/
 Login | https://vacasenvuelo.com/tpaga/index.php/user/login
 Pagar Orden | https://vacasenvuelo.com/tpaga/index.php/user/shopping/
 Consulta Transacciones (Login) | https://vacasenvuelo.com/tpaga/index.php/user/dashboard
+Destruir sesio y productos del carro| https://vacasenvuelo.com/tpaga/index.php/salir
+
 
 ## Autenticación
 
@@ -78,8 +80,7 @@ El aplicativo se encuentra disponible en : https://vacasenvuelo.com/tpaga
 
 **database.php.php** hosting \tpaga\application\config\database.php
 >lineas 76 a 96
-```
- $db['default'] = array(
+``` $db['default'] = array(
 		'dsn'	=> '',
 		'hostname' => 'ejemplo.com',
 		'username' => 'admin',

@@ -103,10 +103,6 @@ public function purchase(){
 	//$this->load->view('shopping',$data);
 }
 
-public function prueba(){
-	$data['url_pago'] = "hola";
-		 $this->load->view('pay',$data);
-}
 
 public function itemsAndTotal(){
 	$shopping = $this->session->userdata('shopping');//obtenemos el string de la cantidad de items
@@ -185,7 +181,7 @@ public function success($invoice = null){
 		// print_r($result['token']);
 		$confirmPay = confirm_pay($result['token']);
 
-		$result['token'] = 'paid'; //quitr esta linea-----
+		//$result['token'] = 'paid'; //quitr esta linea-----
 
 		if ($result['token'] == 'paid' or $result['token'] == 'delivered'){
 			$this->invoices_model->setInvoicePay($invoice);

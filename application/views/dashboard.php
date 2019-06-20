@@ -46,7 +46,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 <script> 
   const typo_peticion ="POST";
-  const url_peticion  = "<?php echo base_url();?>invoices/getReversePay/";
+  const url_peticion  = "<?php echo base_url();?>index.php/invoices/getReversePay/";
 </script>
 
 

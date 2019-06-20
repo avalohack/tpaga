@@ -22,7 +22,7 @@ class Invoices extends CI_Controller {
 				echo json_encode("null");
 			}else{
 
-				$url = base_url()."invoices/setReversePay/".$invoiceResult[0]['order_id'];
+				$url = base_url()."index.php/invoices/setReversePay/".$invoiceResult[0]['order_id'];
 				$url = array('urlReversePay' => $url );
 				$vector = $invoiceResult[0]+$url;
 				// echo "<pre>";
