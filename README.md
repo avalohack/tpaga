@@ -73,34 +73,31 @@ El aplicativo se encuentra disponible en : https://vacasenvuelo.com/tpaga
 
 ## Configuracion de la aplicacion para usar en otro servidor
 **config.php** hosting \tpaga\application\config\config.php
-> por la linea 27 encuentras  $config['base_url'] = 'https://tudominio/tpaga';
+> por la linea 27 encuentras  
+```$config['base_url'] = 'https://tudominio/tpaga';```
 
-
----imgen
-
-
-## Configuracion de la aplicacion para usar en otro servidor
 **database.php.php** hosting \tpaga\application\config\database.php
 >lineas 76 a 96
-> $db['default'] = array(
->		'dsn'	=> '',
->		'hostname' => 'ejemplo.com',
->		'username' => 'admin',
->		'password' => '123456',
->		'database' => 'tpaga',
->		'dbdriver' => 'mysqli',
->		'dbprefix' => '',
->		'pconnect' => FALSE,
->		'db_debug' => (ENVIRONMENT !== 'production'),
->		'cache_on' => FALSE,
->		'cachedir' => '',
->		'char_set' => 'utf8',
->		'dbcollat' => 'utf8_general_ci',
->		'swap_pre' => '',
->		'encrypt' => FALSE,
->		'compress' => FALSE,
->		'stricton' => FALSE,
->		'failover' => array(),
->		'save_queries' => TRUE
->	);
-
+```
+ $db['default'] = array(
+		'dsn'	=> '',
+		'hostname' => 'ejemplo.com',
+		'username' => 'admin',
+		'password' => '123456',
+		'database' => 'tpaga',
+		'dbdriver' => 'mysqli',
+		'dbprefix' => '',
+		'pconnect' => FALSE,
+		'db_debug' => (ENVIRONMENT !== 'production'),
+		'cache_on' => FALSE,
+		'cachedir' => '',
+		'char_set' => 'utf8',
+		'dbcollat' => 'utf8_general_ci',
+		'swap_pre' => '',
+		'encrypt' => FALSE,
+		'compress' => FALSE,
+		'stricton' => FALSE,
+		'failover' => array(),
+		'save_queries' => TRUE
+	);
+```
