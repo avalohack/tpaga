@@ -12,6 +12,8 @@ class Ini extends CI_Controller {
 
 	public function index()
 	{
-		redirect('home');
+
+		$this->load->view('ini');
+		//redirect('home');
 	}
 }
